@@ -17,3 +17,23 @@ model User {
   updatedAt DateTime @updatedAt
   username  String   @unique
 }
+
+model JobApplication {
+  company     String?
+  createdAt   DateTime                  @default(now())
+  dateApplied DateTime?
+  datePosted  DateTime?
+  dateSaved   DateTime?
+  followUp    String?
+  id          String                    @id @default(auto()) @map("_id") @db.ObjectId
+  jobPosition String                    @jobDescription
+  location    String?
+  maxSalary   String?
+  minSalary   String?
+  status      EnumJobApplicationStatus?
+  updatedAt   DateTime                  @updatedAt
+}
+
+enum EnumJobApplicationStatus {
+  Option1
+}
