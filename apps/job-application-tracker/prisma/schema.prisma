@@ -1,0 +1,39 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  createdAt DateTime @default(now())
+  firstName String?
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  lastName  String?
+  password  String
+  roles     Json
+  updatedAt DateTime @updatedAt
+  username  String   @unique
+}
+
+model JobApplication {
+  company     String?
+  createdAt   DateTime                  @default(now())
+  dateApplied DateTime?
+  datePosted  DateTime?
+  dateSaved   DateTime?
+  followUp    String?
+  id          String                    @id @default(auto()) @map("_id") @db.ObjectId
+  jobPosition String                    @jobDescription
+  location    String?
+  maxSalary   String?
+  minSalary   String?
+  status      EnumJobApplicationStatus?
+  updatedAt   DateTime                  @updatedAt
+}
+
+enum EnumJobApplicationStatus {
+  Option1
+}
